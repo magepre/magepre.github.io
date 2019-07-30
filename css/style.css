@@ -14,27 +14,72 @@ body {
 }
 
 div.input-selection {
+    background-color: #777777;
     border-style: inset;
+    border-width: 1px;
     padding: 1rem;
 
 
 }
-div p textarea.input-textfield{
+
+div p textarea.input-textfield {
     background-color: #dcdcdc;
     width: 99%;
 }
 
 div.song-table {
     border-style: inset;
-
+    border-width: 1px;
     padding: 2rem;
     font-family: monospace;
     font-size: 16px;
     background-color: #636262;
 }
 
-.span-arrow-style{
+.span-arrow-style {
     color: #7ab4cc;
+}
+
+input[type="file"] {
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+}
+
+th.start {
+    text-align: start;
+}
+
+th.end {
+    text-align: end;
+}
+
+
+.button {
+    display: inline-block;
+    padding: 0.25rem 2rem;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #555454;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem #999;
+}
+
+.button:hover {
+    background-color: #403f3f
+}
+
+.button:active {
+    background-color: #403f3f;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 @media (min-width: 63rem) {
@@ -46,7 +91,8 @@ div.song-table {
     div.input-selection {
         width: 60rem;
     }
-    div p textarea.input-textfield{
+
+    div p textarea.input-textfield {
         width: 59.5rem;
     }
 
