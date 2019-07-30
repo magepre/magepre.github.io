@@ -1,5 +1,3 @@
-var intTest = 0;
-
 var fileContent = '1';
 
 const row5 = {
@@ -33,10 +31,6 @@ const row4 = {
 
 
 function buttonFunction() {
-    intTest += 1;
-
-    const labelContent = "testing: " + intTest;
-
 
     let contentArray = fileContent.split("\n");
     if (fileContent === "1") {
@@ -44,25 +38,14 @@ function buttonFunction() {
         contentArray = textfieldContent.split("\n");
     }
 
-    console.log(contentArray)
-
-    //todo
-
     const convertedArray = getConvertedString(contentArray);
-
-    // / todo
-
 
     document.getElementById("label_1").innerHTML = '';
     convertedArray.forEach(function (element) {
         document.getElementById("label_1").innerHTML += "<p>" + element + "</p>";
     });
 
-    //labelContent;
-
-
     const inputTest = document.getElementById("input_1").value
-
 
     //alert(window.fileContent);
 };
@@ -82,16 +65,11 @@ function readFileAsString() {
     var reader = new FileReader();
     reader.onload = function (event) {
         fileContent = event.target.result;
-        //console.log(event.target.result);
     };
 
-    //event.target.result
 
     reader.readAsText(files[0]);
 
-    //window.fileContent = '123'
-
-    //console.log(fileContent)
 }
 
 function getConvertedString(lines) {
@@ -100,11 +78,10 @@ function getConvertedString(lines) {
     // 5|a-b---c-d-e-f---|
     // 4|a-b---c-d-e-f---|
     // 5|a-b---c-d-e-f---|
+    
     lines.forEach(function (x) {
-        //console.log(row4)
         if (x) {
             if (x[0] == "5") {
-                //console.log((x[0] == "5"))
                 for (var key in row5) {
                     let pKey = Object.keys(row5[key])[0]
                     if (row5.hasOwnProperty(key)) {
@@ -120,15 +97,9 @@ function getConvertedString(lines) {
                     }
                 }
             }
-            //x = x[0]+ ',' + x[2:-1]
-
             output.push(x);
-
         }
-
-
     });
-    console.log(output);
     return output;
 }
 
@@ -138,9 +109,9 @@ function buttonShowMappingFunction() {
     for (var key in row5) {
         let pKey = Object.keys(row5[key])[0]
         let pVal = row5[key][pKey]
-        //if(row5.hasOwnProperty(key)){
-        x = `${pKey} <span class="span-arrow-style">&#10236;</span> ${pVal}`
-        //}
+        if (row5.hasOwnProperty(key)) {
+            x = `${pKey} <span class="span-arrow-style">&#10236;</span> ${pVal}`
+        }
         output.push(x);
     }
 
@@ -156,9 +127,9 @@ function buttonShowMappingFunction() {
     for (var key in row4) {
         let pKey = Object.keys(row4[key])[0]
         let pVal = row4[key][pKey]
-        //if(row5.hasOwnProperty(key)){
-        x = `${pKey} <span class="span-arrow-style">&#10236;</span> ${pVal}`
-        //}
+        if (row5.hasOwnProperty(key)) {
+            x = `${pKey} <span class="span-arrow-style">&#10236;</span> ${pVal}`
+        }
         output.push(x);
     }
 
