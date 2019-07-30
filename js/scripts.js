@@ -112,6 +112,30 @@ function buttonFunction() {
 
     const convertedArray = getConvertedString(contentArray);
 
+
+    //todo
+    let processedArray = [];
+    const processingEnabled = false;
+    if (processingEnabled) {
+        for (var i in convertedArray) {
+
+            if (convertedArray[i] && convertedArray[i + 3] && convertedArray[i + 1] && convertedArray[i + 4] && convertedArray[i].substring(0, 1) == convertedArray[i + 3].substring(0, 1) && convertedArray[i + 1].substring(0, 1) == convertedArray[i + 4].substring(0, 1)) {
+                processedArray[i] = convertedArray[i] + convertedArray[i + 3]
+                //     # processedArrayDeleteRows[i] = "ok"
+//     processedArrayDeleteRows[i+3] = "delete"
+            } else if (convertedArray[i] && convertedArray[i + 3] && convertedArray[i - 1] && convertedArray[i + 2] && convertedArray[i].substring(0, 1) == convertedArray[i + 3].substring(0, 1) && convertedArray[i - 1].substring(0, 1) == convertedArray[i + 2].substring(0, 1)) {
+                processedArray[i] = convertedArray[i] + convertedArray[i + 3]
+//     # processedArrayDeleteRows[i] = "ok"
+//     processedArrayDeleteRows[i+3] = "delete"
+            } else {
+                processedArray[i] = convertedArray[i]
+            }
+
+        }
+    }
+    // console.log(processedArray)
+
+
     document.getElementById("label_1").innerHTML = '';
     convertedArray.forEach(function (element) {
         document.getElementById("label_1").innerHTML += "<p>" + element + "</p>";
@@ -151,7 +175,7 @@ function getConvertedString(lines) {
     // 5|a-b---c-d-e-f---|
     // 4|a-b---c-d-e-f---|
     // 5|a-b---c-d-e-f---|
-    
+
     lines.forEach(function (x) {
         if (x) {
             if (x[0] == "5") {
