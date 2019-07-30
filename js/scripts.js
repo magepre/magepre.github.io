@@ -38,8 +38,13 @@ function buttonFunction() {
     const labelContent = "testing: " + intTest;
 
 
-    const contentArray = fileContent.split("\n");
+    let contentArray = fileContent.split("\n");
+    if (fileContent === "1") {
+        const textfieldContent = document.getElementById("input_1").value
+        contentArray = textfieldContent.split("\n");
+    }
 
+    console.log(contentArray)
 
     //todo
 
@@ -92,7 +97,9 @@ function readFileAsString() {
 function getConvertedString(lines) {
     var output = [];
 
-
+    // 5|a-b---c-d-e-f---|
+    // 4|a-b---c-d-e-f---|
+    // 5|a-b---c-d-e-f---|
     lines.forEach(function (x) {
         //console.log(row4)
         if (x) {
@@ -100,16 +107,16 @@ function getConvertedString(lines) {
                 //console.log((x[0] == "5"))
                 for (var key in row5) {
                     let pKey = Object.keys(row5[key])[0]
-                    //if(row5.hasOwnProperty(key)){
-                    x = x.replace(pKey, row5[key][pKey])
-                    //}
+                    if (row5.hasOwnProperty(key)) {
+                        x = x.replace(new RegExp(pKey, 'g'), row5[key][pKey])
+                    }
                 }
 
             } else if (x[0] == "4") {
                 for (var key in row4) {
                     let pKey = Object.keys(row4[key])[0]
                     if (row4.hasOwnProperty(key)) {
-                        x = x.replace(pKey, row4[key][pKey])
+                        x = x.replace(new RegExp(pKey, 'g'), row4[key][pKey])
                     }
                 }
             }

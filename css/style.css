@@ -19,6 +19,10 @@ div.input-selection {
 
 
 }
+div p textarea.input-textfield{
+    background-color: #dcdcdc;
+    width: 99%;
+}
 
 div.song-table {
     border-style: inset;
@@ -33,18 +37,21 @@ div.song-table {
     color: #7ab4cc;
 }
 
-@media (min-width: 33rem) {
+@media (min-width: 63rem) {
     h1 {
-        width: 30rem;
+        width: 60rem;
         margin-left: 0;
     }
 
     div.input-selection {
-        width: 30rem;
+        width: 60rem;
+    }
+    div p textarea.input-textfield{
+        width: 59.5rem;
     }
 
     div.song-table {
-        width: 28rem;
+        width: 58rem;
 
         font-family: monospace;
         font-size: 16px;
