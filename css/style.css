@@ -48,6 +48,10 @@ table {
     width: 100%;
 }
 
+table.file-selection-row {
+    padding-bottom: 0.5rem;
+}
+
 th.start {
     text-align: start;
 }
