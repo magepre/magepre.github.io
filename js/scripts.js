@@ -186,7 +186,7 @@ function getConvertedString(lines) {
                     }
                 }
 
-            } else if (x[0] == "4") {
+            } else if (x[0] == "4" || x[0] == "3") {
                 for (var key in row4) {
                     let pKey = Object.keys(row4[key])[0]
                     if (row4.hasOwnProperty(key)) {
