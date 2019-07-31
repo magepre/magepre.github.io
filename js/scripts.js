@@ -11,8 +11,7 @@ const row5 = {
     8: {"a-": "&#214;,"}, //Ö
     9: {"h-": "&#220;,"}, //Ü
     10: {"b-": "&#220;,"}, //Ü
-    11: {"|-": ",,"},
-    12: {"-": ","},
+    11: {"-": ","},
 }
 
 const row4 = {
@@ -27,8 +26,7 @@ const row4 = {
     9: {"a-": "D,"},
     10: {"h-": "R,"},
     11: {"b-": "R,"},
-    12: {"|-": ",,"},
-    13: {"-": ","},
+    12: {"-": ","},
 }
 
 const pln_lost_woods = "5|----------------------e-d-|\n" +
@@ -140,7 +138,9 @@ function buttonFunction() {
 
     document.getElementById("label_1").innerHTML = '';
     convertedArray.forEach(function (element) {
-        document.getElementById("label_1").innerHTML += "<p>" + element + "</p>";
+        let nElement = element.replace("|", "")
+        let nElement = nElement.substring(0,nElement.length-1);
+        document.getElementById("label_1").innerHTML += "<p>" + nElement + "</p>";
     });
 
     const inputTest = document.getElementById("input_1").value
