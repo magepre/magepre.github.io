@@ -139,8 +139,8 @@ function buttonFunction() {
     document.getElementById("label_1").innerHTML = '';
     convertedArray.forEach(function (element) {
         let nElement = element.replace("|", "")
-        let nElement = nElement.substring(0,nElement.length-1);
-        document.getElementById("label_1").innerHTML += "<p>" + nElement + "</p>";
+        let nElement2 = nElement.substring(0,nElement.length-1);
+        document.getElementById("label_1").innerHTML += "<p>" + nElement2 + "</p>";
     });
 
     const inputTest = document.getElementById("input_1").value
