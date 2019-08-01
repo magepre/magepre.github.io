@@ -102,6 +102,7 @@ const pln_lost_woods = "5|----------------------e-d-|\n" +
     "5|b-------------------------|";
 
 
+
 function buttonFunction() {
 
     let contentArray = fileContent.split("\n");
@@ -138,9 +139,7 @@ function buttonFunction() {
 
     document.getElementById("label_1").innerHTML = '';
     convertedArray.forEach(function (element) {
-        let nElement = element.replace("|", ",")
-        let nElement2 = nElement.substring(0,nElement.length-1);
-        document.getElementById("label_1").innerHTML += "<p>" + nElement2 + "</p>";
+        document.getElementById("label_1").innerHTML += "<p>" + element + "</p>";
     });
 
     const inputTest = document.getElementById("input_1").value
@@ -148,11 +147,39 @@ function buttonFunction() {
     //alert(window.fileContent);
 };
 
+function buttonFunctionTest() {
+
+    let contentArray = fileContent.split("\n");
+    if (fileContent === "1") {
+        const textfieldContent = document.getElementById("input_1").value
+        contentArray = textfieldContent.split("\n");
+    }
+
+    const convertedArray = getConvertedStringByInputMapping(contentArray);
+
+    console.log(convertedArray)
+    document.getElementById("label_1").innerHTML = '';
+    convertedArray.forEach(function (element) {
+        document.getElementById("label_1").innerHTML += "<p>" + element + "</p>";
+    });
+};
+
+
+document.body.onload = function(){
+    // document.getElementById("input_mapping").value += JSON.stringify(row4,null,"\t");
+    document.getElementById("input_mapping").value += JSON.stringify(row5,null,"\t");
+};
 
 document.getElementById('upload').addEventListener('change', readFileAsString)
 document.getElementById('button_1').addEventListener('click', buttonFunction)
+document.getElementById('button_1_test').addEventListener('click', buttonFunctionTest)
 document.getElementById('button_show_mapping').addEventListener('click', buttonShowMappingFunction)
 document.getElementById('button_get_lost_woods').addEventListener('click', getLostWoods)
+
+
+function initFunction(){
+
+};
 
 function readFileAsString() {
     var files = this.files;
@@ -188,7 +215,47 @@ function getConvertedString(lines) {
                     }
                 }
 
-            } else if (x[0] == "4" || x[0] == "3") {
+            } else if (x[0] == "4") {
+                for (var key in row4) {
+                    let pKey = Object.keys(row4[key])[0]
+                    if (row4.hasOwnProperty(key)) {
+                        x = x.replace(new RegExp(pKey, 'g'), row4[key][pKey])
+                    }
+                }
+            }
+            output.push(x);
+        }
+    });
+    return output;
+}
+
+function getConvertedStringByInputMapping(lines) {
+    var output = [];
+
+    // 5|a-b---c-d-e-f---|
+    // 4|a-b---c-d-e-f---|
+    // 5|a-b---c-d-e-f---|
+
+    var str = document.getElementById("input_mapping").value;
+    console.log(str)
+    try {
+        var obj = JSON.parse(str); // this is how you parse a string into JSON
+    } catch (ex) {
+        console.error(ex);
+    }
+    console.log(obj);
+
+    lines.forEach(function (x) {
+        if (x) {
+            if (x[0] == "5") {
+                for (var key in obj) {
+                    let pKey = Object.keys(obj[key])[0]
+                    if (obj.hasOwnProperty(key)) {
+                        x = x.replace(new RegExp(pKey, 'g'), obj[key][pKey])
+                    }
+                }
+
+            } else if (x[0] == "4") {
                 for (var key in row4) {
                     let pKey = Object.keys(row4[key])[0]
                     if (row4.hasOwnProperty(key)) {
