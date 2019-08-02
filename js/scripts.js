@@ -29,6 +29,21 @@ const row4 = {
     12: {"-": ","},
 }
 
+const row3 = {
+    1: {"ah-": "DR,"},
+    2: {"ab-": "DR,"},
+    3: {"ef-": "EA,"},
+    4: {"c-": "Q,"},
+    5: {"d-": "W,"},
+    6: {"e-": "E,"},
+    7: {"f-": "A,"},
+    8: {"g-": "S,"},
+    9: {"a-": "D,"},
+    10: {"h-": "R,"},
+    11: {"b-": "R,"},
+    12: {"-": ","},
+}
+
 const pln_lost_woods = "5|----------------------e-d-|\n" +
     "4|f-a-b---f-a-b---f-a-b-----|\n" +
     "\n" +
@@ -102,7 +117,6 @@ const pln_lost_woods = "5|----------------------e-d-|\n" +
     "5|b-------------------------|";
 
 
-
 function buttonFunction() {
 
     let contentArray = fileContent.split("\n");
@@ -157,7 +171,6 @@ function buttonFunctionTest() {
 
     const convertedArray = getConvertedStringByInputMapping(contentArray);
 
-    console.log(convertedArray)
     document.getElementById("label_1").innerHTML = '';
     convertedArray.forEach(function (element) {
         document.getElementById("label_1").innerHTML += "<p>" + element + "</p>";
@@ -165,9 +178,17 @@ function buttonFunctionTest() {
 };
 
 
-document.body.onload = function(){
-    // document.getElementById("input_mapping").value += JSON.stringify(row4,null,"\t");
-    document.getElementById("input_mapping").value += JSON.stringify(row5,null,"\t");
+document.body.onload = function () {
+
+    document.getElementById("input_mapping").value += ">3>";
+    document.getElementById("input_mapping").value += JSON.stringify({}, null, "\t");
+
+    document.getElementById("input_mapping").value += ">4>";
+    document.getElementById("input_mapping").value += JSON.stringify(row4, null, "\t");
+
+    document.getElementById("input_mapping").value += ">5>";
+    document.getElementById("input_mapping").value += JSON.stringify(row5, null, "\t");
+
 };
 
 document.getElementById('upload').addEventListener('change', readFileAsString)
@@ -177,7 +198,7 @@ document.getElementById('button_show_mapping').addEventListener('click', buttonS
 document.getElementById('button_get_lost_woods').addEventListener('click', getLostWoods)
 
 
-function initFunction(){
+function initFunction() {
 
 };
 
@@ -232,40 +253,44 @@ function getConvertedString(lines) {
 function getConvertedStringByInputMapping(lines) {
     var output = [];
 
-    // 5|a-b---c-d-e-f---|
-    // 4|a-b---c-d-e-f---|
-    // 5|a-b---c-d-e-f---|
+    const newMapping = document.getElementById("input_mapping").value.split('>');
+    var index = 0;
 
-    var str = document.getElementById("input_mapping").value;
-    console.log(str)
-    try {
-        var obj = JSON.parse(str); // this is how you parse a string into JSON
-    } catch (ex) {
-        console.error(ex);
+    var newMappingArray = Create2DArray(newMapping.length);
+
+    for (var x in newMapping) {
+        if (newMapping[x] !== '') {
+            if (/^\d$/.test(newMapping[x])) {
+                newMappingArray[index][0] = newMapping[x];
+            } else {
+                newMappingArray[index][1] = JSON.parse(newMapping[x]);
+                index = index + 1;
+            }
+        }
     }
-    console.log(obj);
 
     lines.forEach(function (x) {
-        if (x) {
-            if (x[0] == "5") {
-                for (var key in obj) {
-                    let pKey = Object.keys(obj[key])[0]
-                    if (obj.hasOwnProperty(key)) {
-                        x = x.replace(new RegExp(pKey, 'g'), obj[key][pKey])
-                    }
-                }
 
-            } else if (x[0] == "4") {
-                for (var key in row4) {
-                    let pKey = Object.keys(row4[key])[0]
-                    if (row4.hasOwnProperty(key)) {
-                        x = x.replace(new RegExp(pKey, 'g'), row4[key][pKey])
+        for (var mappingKey in newMappingArray) {
+
+            if (newMappingArray[mappingKey] === []) {
+                continue;
+            }
+
+            if (x) {
+                if (x[0] == newMappingArray[mappingKey][0]) {
+                    for (var key in newMappingArray[mappingKey][1]) {
+                        let pKey = Object.keys(newMappingArray[mappingKey][1][key])[0]
+                        if (newMappingArray[mappingKey][1].hasOwnProperty(key)) {
+                            x = x.replace(new RegExp(pKey, 'g'), newMappingArray[mappingKey][1][key][pKey])
+                        }
                     }
+                    output.push(x);
                 }
             }
-            output.push(x);
         }
     });
+    console.log(output)
     return output;
 }
 
@@ -309,6 +334,14 @@ function buttonShowMappingFunction() {
 
 function getLostWoods() {
     document.getElementById("input_1").value = pln_lost_woods
+}
+
+function Create2DArray(rows) {
+    var arr = [];
+    for (var i = 0; i < rows; i++) {
+        arr[i] = [];
+    }
+    return arr;
 }
 
 
